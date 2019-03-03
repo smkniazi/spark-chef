@@ -95,14 +95,6 @@ attribute "install/user",
           :description => "User to install the services as",
           :type => "string"
 
-attribute "hopsmonitor/default/private_ips",
-          :description => "Influxdb ip",
-          :type => "string"
-
-attribute "hopslog/default/private_ips",
-          :description => "elk services ip",
-          :type => "string"
-
 attribute "hadoop_spark/tf_spark_connector_version",
           :description => "the version of the tf-spark-connector .jar",
           :type => "string"
