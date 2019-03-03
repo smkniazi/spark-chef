@@ -23,16 +23,16 @@ default['hadoop_spark']['eventlog_enabled']                     = "true"
 default['hadoop_spark']['driver']['maxResultSize']                 = "512m"
 default['hadoop_spark']['io']['compression']['codec']              = "snappy"
 default['hadoop_spark']['streaming']['stopGracefullyOnShutdown']   = "true"
-default['hadoop_spark']['master']['port']                          = 7077
 
 default['hadoop_spark']['worker']['cleanup']['enabled']= true
 
 default['hadoop_spark']['historyserver']['port']                   = 18080
+default['hadoop_spark']['historyserver']['private_ips']            = node["install"]["private_ips"].empty? ? ['10.0.2.15'] : node["install"]["private_ips"]
+default['hadoop_spark']['historyserver']['public_ips']             = node["install"]["public_ips"].empty? ? ['10.0.2.15'] : node["install"]["public_ips"]  
 
 
 # Pick hadoop distribution. Options are 'hops' and 'hadoop'
 default['hadoop_spark']['hadoop']['distribution']                  = "hops"
-default['hadoop_spark']['master']['public_key']                    = ""
 default['hadoop_spark']['yarn']['support']                         = "false"
 default['hadoop_spark']['authenticate']['secret']                  = ""
 default['hadoop_spark']['yarn']['am']['waitTime']                  = "100s"
@@ -57,7 +57,6 @@ default['hadoop_spark']['pyFiles']                                 = "local://#{
 default['hadoop_spark']['yarn']['jars']                            = "local://#{node['hadoop_spark']['base_dir']}/jars/*"
 default['hadoop_spark']['yarn']['am']['memory']                    = "512m"
 default['hadoop_spark']['yarn']['containerLauncherMaxThreads']     = 25
-default['hadoop_spark']['yarn']['private_ips']                     = []
 #default.spark.yarn.am.waitTime                           = "100s"
 #default.spark.yarn.max.executor.failures                 = 3
 #default.spark.yarn.historyServer.address

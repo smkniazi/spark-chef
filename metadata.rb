@@ -15,13 +15,8 @@ depends          "hopsmonitor"
 depends          'hive2'
 
 recipe           "install", "Installs Spark binaries"
-#link:<a target='_blank' href='http://%host%:8080/'>Launch the WebUI for the Spark Master</a>
-recipe           "master", "Starts a Spark master"
-#link:<a target='_blank' href='http://%host%:8081/'>Launch the WebUI for the Spark Slave %host%</a>
-recipe           "worker", "Starts a Spark worker"
 recipe           "yarn", "Creates directories for yarn. Run on only one machine."
 recipe           "default", "Install spark binaries only."
-recipe           "libs", "Install spark jars to nodemanager hosts"
 recipe           "historyserver", "Installs/starts the Spark historyserver"
 
 attribute "hadoop_spark/user",
@@ -85,7 +80,11 @@ attribute "hadoop_spark/local/dir",
           :type => 'string'
 
 attribute "hadoop_spark/historyserver/private_ips",
-          :description => "historyserver ip addr",
+          :description => "historyserver private ip addrs",
+          :type => 'array'
+
+attribute "hadoop_spark/historyserver/public_ips",
+          :description => "historyserver public ip addrs",
           :type => 'array'
 
 attribute "install/dir",
