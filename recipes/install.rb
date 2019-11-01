@@ -40,6 +40,10 @@ directory node['hadoop_spark']['dir']  do
 end
 
 package_url = "#{node['hadoop_spark']['url']}"
+if node['install']['enterprise']['install'].casecmp? "true"
+  package_url = "#{node['install']['enterprise']['download_url']}/spark/spark-#{node['hadoop_spark']['version']}-bin-without-hadoop-with-hive-with-r.tgz"
+end
+
 base_package_filename = File.basename(package_url)
 cached_package_filename = "#{Chef::Config['file_cache_path']}/#{base_package_filename}"
 
@@ -47,6 +51,8 @@ remote_file cached_package_filename do
   source package_url
   owner "root"
   mode "0644"
+  headers get_ee_basic_auth_header()
+  sensitive true
   action :create_if_missing
 end
 
